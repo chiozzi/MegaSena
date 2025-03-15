@@ -15,12 +15,12 @@
               type="button"
               class="btn"
               [ngClass]="{
-                'btn-primary': isSelecionado(numero), 
-                'btn-light': !isSelecionado(numero),
-                'btn-secondary': isSelecionado(numero) && selecaoAposta.length < 10, 
+                'btn-primary': numeroFoiSelecionado(numero), 
+                'btn-light': !numeroFoiSelecionado(numero),
+                'btn-secondary': numeroFoiSelecionado(numero) && selecaoAposta.length < 10, 
                 'btn-danger': selecaoAposta.length >= 10
               }"
-              style="font-size: 18px; width: 50px; height: 50px; border-radius: 50%; margin: 2px; "
+              style="font-size: 18px; width: 50px; height: 50px; border-radius: 50%; margin: 2px;"
               (click)="selecionarNumero(numero)">
                <!-- Exibe o número no botão -->
               {{ numero }}
@@ -34,7 +34,7 @@
         </p>
 
         <div class="d-flex justify-content-center mb-3">
-          <button type="button" class="btn btn-primary" style="font-size: 22px; background-color: purple; color: white; padding: 8px 0; width: 200px;" (click)="onSubmit()">Conferir Aposta</button>
+          <button type="button" class="btn btn-primary" style="font-size: 22px; background-color: purple; color: white; padding: 8px 0; width: 200px;" (click)="enviarAposta()">Conferir Aposta</button>
         </div>
 
         <div class="mb-5 text-center">
@@ -46,7 +46,7 @@
         </div>
 
         <div class="d-flex justify-content-center mb-3">
-          <button type="button" class="btn btn-secondary" style="font-size: 20px; background-color: purple; color: white; padding: 8px 0; width: 200px;" (click)="toggleSorteados()">Mostrar Números Sorteados</button>
+          <button type="button" class="btn btn-secondary" style="font-size: 20px; background-color: purple; color: white; padding: 8px 0; width: 200px;" (click)="alternarSorteados()">Mostrar Números Sorteados</button>
         </div>
 
         <!-- Exibição dos números sorteados, se a variável sorteadosExibidos for verdadeira -->

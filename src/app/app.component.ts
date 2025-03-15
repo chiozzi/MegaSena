@@ -8,17 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   // Variáveis que armazenam os dados necessários
-  sorteados: number[] = []; // Números sorteados aleatoriamente
-  aposta: number[] = []; // Números escolhidos pelo usuário
-  resultado: number | null = null; // Resultado da conferência de acertos (ou null se ainda não foi conferido)
-  sorteadosExibidos: boolean = false; // Controle para exibir ou ocultar os números sorteados
-  numeros: number[] = Array.from({ length: 60 }, (_, i) => i + 1); // Números de 1 a 60 para o usuário escolher
-  selecaoAposta: number[] = []; // Números selecionados pelo usuário para aposta
-  mensagemErro: string = ''; // Mensagem de erro (por exemplo, se o usuário tentar selecionar mais de 10 números)
+  sorteados: number[] = [];
+  aposta: number[] = [];
+  resultado: number | null = null; 
+  sorteadosExibidos: boolean = false;
+  numeros: number[] = Array.from({ length: 60 }, (_, i) => i + 1); 
+  selecaoAposta: number[] = [];
+  mensagemErro: string = '';
 
   // Construtor que chama a função para sortear os números
   constructor() {
-    this.sorteados = this.sortearNumeros(); // Sorteia os números ao iniciar o componente
+    this.sorteados = this.sortearNumeros();
   }
 
   // Função que sorteia 6 números únicos entre 1 e 60
@@ -30,15 +30,15 @@ export class AppComponent {
         numeros.push(num);
       }
     }
-    return numeros; // Retorna a lista de números sorteados
+    return numeros; 
   }
 
-  // Função que compara a aposta do usuário com os números sorteados e conta os acertos
+  
   conferirAposta() {
     this.resultado = this.selecaoAposta.filter(num => this.sorteados.includes(num)).length;
   }
 
-  // Função para adicionar ou remover números da seleção de aposta
+  
   selecionarNumero(numero: number) {
     const index = this.selecaoAposta.indexOf(numero); // Verifica se o número já está na lista de aposta
 
@@ -47,7 +47,7 @@ export class AppComponent {
         this.selecaoAposta.push(numero);
         this.mensagemErro = ''; // Limpa a mensagem de erro caso esteja dentro do limite
       } else {
-        this.mensagemErro = 'Você só pode selecionar até 10 números!'; // Mensagem de erro se tentar selecionar mais de 10
+        this.mensagemErro = 'Você só pode selecionar até 10 números!'; 
       }
     } else { // Se o número já está na lista, remove
       this.selecaoAposta.splice(index, 1);
@@ -56,17 +56,17 @@ export class AppComponent {
   }
 
   // Função para verificar se um número está na seleção de aposta
-  isSelecionado(numero: number): boolean {
+  numeroFoiSelecionado(numero: number): boolean {
     return this.selecaoAposta.includes(numero); // Retorna true se o número estiver na lista de aposta
   }
 
-  // Função para alternar a visibilidade dos números sorteados
-  toggleSorteados() {
-    this.sorteadosExibidos = !this.sorteadosExibidos; // Inverte o valor de sorteadosExibidos (mostra ou esconde)
+  // Função para mostrar ou esconder os números sorteados
+  alternarSorteados() {
+    this.sorteadosExibidos = !this.sorteadosExibidos; 
   }
 
   // Função chamada ao submeter a aposta
-  onSubmit() {
+  enviarAposta() {
     if (this.selecaoAposta.length >= 6 && this.selecaoAposta.length <= 10) { // Verifica se a aposta tem entre 6 e 10 números
       this.aposta = this.selecaoAposta; // Define a aposta com os números selecionados
       this.conferirAposta(); // Chama a função para conferir quantos números foram acertados
